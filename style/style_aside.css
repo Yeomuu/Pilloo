@@ -1,0 +1,735 @@
+/* aside 탭 css 파일 */
+
+/* 사이드메뉴 기본 설정 */
+aside{
+    width: 450px;
+    height: 100vh;
+
+    background: var(--bg-icon-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.3px);
+    -webkit-backdrop-filter: blur(5.3px);
+    border: 1px solid rgba(0, 0, 0, 0.29);
+
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+
+    overflow: hidden;
+}
+
+.asideLogo{
+    width: 42px;
+
+    position: fixed;
+    top: 30px;
+    left: 28px;
+}
+
+/* 기본 셋팅_기본 안보이게 */
+#checkList-aside{
+    transform: translateX(-450px);
+    transform-origin: left;
+    transition: all ease-in-out 0.5s;
+}
+
+#D-DAY-aside{
+    transform: translateX(-450px);
+    transform-origin: left;
+    transition: all ease-in-out 0.5s;
+}
+
+/* aside 탭 안에 패딩값 20px */
+.aside-container{
+    padding: 28px;
+}
+
+/* 상단에 있는 탭 제목(투두 리스트, 디데이), 설명 텍스트 컨테이너*/
+.text-container{
+    height: 52px;
+
+    text-align: center;
+    margin-top: 68px;
+    margin-bottom: 24px;
+}
+
+/* 탭 제목 */
+aside h4{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: var(--font-color);
+}
+
+/* 탭 설명 */
+aside p{
+    font-size: 14px;
+    color: var(--font-color);
+}
+
+aside svg{
+    margin: 4px;
+}
+
+/* 투두 리스트, 디데이 입력 컨테이너  */
+#todoInput, #dayInput{
+    display: flex;
+}
+#todoInput{
+    margin-bottom: 20px;
+}
+
+/* 투두리스트, 디데이 입력 창 */
+#todoText, #dayText{
+    all: unset;
+    width: 322px;
+    height: 48px;
+
+    border: 0.8px solid #fff;
+    border-radius: 5px 0 0 5px;
+    padding-left: 14.5px;
+
+    color:var(--font-color);
+}
+
+/* 투두리스트, 디데이 입력 버튼 */
+#todoBtn, #dayBtn{
+    all: unset;
+    width: 72px;
+    height: 48px;
+
+    background-color: #72A6C4;
+    color: #fff;
+    
+    border: 0.8px solid #fff;
+    border-radius: 0 5px 5px 0;
+
+    text-align: center;
+}
+
+/* 입력 창 아래 선 */
+hr{
+    background:#fff;
+    height:1px;
+    border:0;
+}
+#checkList-aside hr{
+    margin-bottom: 20px;
+}
+
+/* 생성된 할 일 목록  */
+.todo{
+    width: 395px;
+    height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    align-items: stretch; 
+}
+
+/* todo 박스 기본 css */
+.todo-item{
+    width: 394px;
+    height: 48px;
+
+    border: 0.8px solid #fff;
+    border-radius: 5px;
+    background-color: rgb(217, 217, 217, 0.1) ;
+
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding: 0 8px 0 12px;
+    gap: 10px;
+
+    transition: all 0.1s;
+}
+
+/* 기본 체크박스 스타일 제거 */
+.todo-checkbox{
+    appearance: none;
+}
+
+/* 가짜 체크박스 스타일 */
+.custom-checkbox {
+    width: 16px;
+    height: 16px;
+
+    border: 0.7px solid #fff;
+    border-radius: 3px;
+    background-color: rgba(255,255,255,0.2);
+    
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: all 0.1s ease;
+}
+
+/* 체크박스 테두리 색상변경 */
+.todo-checkbox:checked + .custom-checkbox {
+    border-color: #999;
+}
+
+/* 체크 표시 생성 */
+.todo-checkbox:checked + .custom-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    width: 5px;
+    height: 8px;
+    border: solid #D8D8D8;
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+}
+
+.todo-text {
+    font-family: 'Pretendard-Regular';
+    font-size: 16px;
+}
+
+/* 체크시 텍스트 위에 선 생성 */
+.todo-checkbox:checked ~ .todo-text {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* todo 박스 테두리 색상 변경  */
+.todo-item:has(.todo-checkbox:checked) {
+  border-color: #999;
+}
+
+.todo-item p{
+    width: 290px;
+    text-decoration: none;
+}
+
+/* aside 탭 디데이*/
+#D-DAY-aside{
+    position: fixed;
+    height: 100vh;
+    width: 450px;
+
+    background: var(--bg-icon-color);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    border: 1px solid #1B1F2180;
+
+    transition: all 0.3s ease;
+}
+
+#D-DAY-aside.open{
+    transform: translateX(0);
+}
+
+/* 날짜 선정 */
+/* 기본 상태 삭제 */
+#selectDate{
+    width: 115px;
+    position: relative;
+    
+    background: transparent;    
+    color: transparent;
+    border: none;
+
+    margin-left: 190px;                  
+}
+
+#selectDate:focus{
+    outline: none;
+    color: var(--font-color);                        
+}
+/* 기본 달력 아이콘 지우기 */
+#selectDate::-webkit-calendar-picker-indicator {
+    width: 100%;
+    height: 100%;
+    
+    position:absolute;
+    left: 0; top: 0;
+
+    color: transparent;
+    background: transparent;
+    cursor: pointer;
+}
+
+.date-label {
+  position: absolute;
+  right: 72px;
+  pointer-events: none;
+  color: var(--font-color);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#date{
+    height: 84px;
+
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--font-color);
+}
+
+/* 디데이 수정창 */
+.day-item input[type='text']{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--font-color);
+    background: #ffffff50;
+    border: none;
+}
+
+.day-item input[type='text']:focus{
+    outline: none;
+}
+
+.past-label{
+    color: #0000005d;
+}
+
+.day{
+    width: 395px;
+    height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    align-items: stretch; 
+}
+
+/* 디데이 박스 */
+.day-item{
+    width: 394px;
+    height: 88px;
+
+    border-bottom: 0.5px solid #ADADAD;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+
+    padding: 0 12px;
+    gap: 10px;
+}
+
+.dayTitle{
+    width: 260px;
+}
+
+/* 디데이 날짜 */
+.dayDate{ 
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+/* 사이드 탭 통계 */
+#stats-aside{
+    position: fixed;
+    height: 100vh;
+    width: 652px;
+
+    background: var(--bg-icon-color);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    border: 1px solid #1B1F2180;
+
+    
+    transform: translateX(-652px);
+    transform-origin: left;
+    transition: all ease-in-out 0.5s;
+}
+
+#stats-aside svg{
+    position: absolute;
+    left: 32px; top: 30px;
+}
+
+#stats-aside .text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 140px;
+}
+
+#stats-aside .text-container h4{
+    margin-bottom: 0;
+}
+
+/* 오늘 월간 토글 */
+#statsToggle{
+    height: 48px;
+    width: 196px;
+    
+    background: rgba(255, 255, 255, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 42px;
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+    border: 1px solid #ffffff50;
+    border-radius: 30px;
+
+    position: relative;
+}
+
+#statsToggle p{
+    width: 107px;
+    height: 46px;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 46px;
+    text-align: center;
+}
+
+#dBtn{
+    position: absolute;
+    left: 0;
+}
+
+#mBtn{
+    position: absolute;
+    right: 0;
+}
+
+.nowStats{
+    background-color: #72A6C4;
+
+    border-radius: 40px;
+}
+
+/* 사이드 탭 통계 오늘 목록 (집중시간, 완료한 할 일, 뽀모도로 횟수, 휴식 시간)*/
+#statsSummary {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 20px;
+}
+
+/* 사이드 탭 통계 오늘 아이템*/
+.stat-item{
+    padding: 0 16px;
+}
+/* 아이템 이름 */
+.label{
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+/* 통계 내용 */
+.value{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* 최근 집중 그래프 */
+#statsChart h3 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 6px;
+
+  color: var(--font-color);
+  margin-bottom: 36px;
+}
+
+/* 최근 집중 그래프 바 컨테이너*/
+#chartBars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  gap: 26px;
+  height: 300px;
+}
+
+/* 그래프 바 그룹*/
+.bar-group {
+    width: 68px;
+    height: 100%; 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  
+    box-sizing: border-box;
+}
+
+/* 그래프 텍스트*/
+.bar-time,
+.bar-date {
+  font-size: 16px;
+  color: var(--font-color);
+  text-align: center;
+}
+
+/* 그래프 시간 텍스트*/
+.bar-time{
+    margin-bottom: 12px;
+}
+/* 그래프 날짜 텍스트*/
+.bar-date{
+    margin-top: 18px;
+}
+
+/* 그래프 바 css*/
+.bar {
+    width: 56px;
+
+    background-color: #72A6C4;
+    border-radius: 8px;
+}
+
+
+/* 통계 월별 부분 */
+/* 캘린더 박스 */
+#calendar {
+    width: 540px;
+    height: max-content;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    
+    padding: 24px 50px;
+    margin-bottom: 18px;
+}
+
+/* n월 폰트 색상 */
+.calendar p, span{
+    color: var(--font-color);
+}
+
+/* 월 선택 헤더 */
+.calendarHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 18px;
+    margin-bottom: 44px;
+}
+
+/* 월 선택 화살표 */
+.calendarHeader button{
+    width: 20px;
+    height: 20px;
+    
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.calendarHeader svg{
+   position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+}
+
+/* 캘린더 컨테이너 */
+.calendarContainer {
+    width: 448px;
+    height: max-content;
+}
+
+/* 요일 */
+#dayLabel {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 12px;
+}
+.day-label {
+  font-weight: 300;
+  color: var(--font-color);
+}
+
+/* 날짜 셀 */
+#dayCell{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 60px; 
+
+}
+.day-cell {
+    height: 60px;
+    text-align: center;
+    padding-top: 10px;
+
+    font-size: 14px;
+    font-weight: 300;
+
+    color: var(--font-color);
+    opacity: 0.8;
+}
+/* 선택된 날짜 셀 (테두리) */
+.day-cell.select {
+    background-color: #4FA1D2;
+}
+/* 날짜 셀 스터디 시간 */
+.day-cell .study-time {
+  font-size: 14px;
+  font-weight: 500;
+  
+  margin-top: 6px;
+  display: block;
+  color: var(--font-color);
+}
+
+/* 선택 날짜 상세 통계 */
+#dayDetail {
+    width: 540px;
+    height: max-content;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 18px 20px;
+    border-radius: 5px;
+}
+
+#dayDetail h4 {
+    font-size: 15px;
+    font-weight: 500;
+    
+    color: #2B2B2B;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+#detailContainer {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    text-align: center;
+}
+
+/* 통계 이름 (총 공부 시간, 휴식 시간, 시작 시간, 종료 시간) */
+.detail-item .label {
+    color: #2B2B2B;
+    margin-bottom: 15px;
+}
+/* 통계 시간 */
+.detail-item .value {
+    width: max-content;
+    color: #2B2B2B;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#statsM{
+    display: none;
+}
+
+/* 마이페이지 */
+#Mypage_aside{
+    height: 100vh;
+    transform: translateX(-450px);
+    transform-origin: left;
+    transition: all ease-in-out 0.5s;
+}
+
+#Mypage_aside #user{
+    width: 400px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    margin: 100px auto 0;
+}
+
+#profile{
+    width: 54px;
+    height: 54px;
+
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#name{
+    font-size: 24px;
+    line-height: 54px;
+
+    font-weight: 500;
+    color: var(--font-color);
+}
+
+.Line{
+    width: 400px;
+    height: 0.5px;
+
+    background-color: #CECECE;
+
+    margin: 20px auto;
+}
+
+/* 배경 이미지 리스트 */
+#imgList p{
+    font-size: 20px;
+    font-weight: 500;
+
+    color: var(--font-color);
+
+    margin: 24px 0 16px;
+}
+
+#imgList {
+    width: 400px;
+    height: 65vh;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    margin: 0 auto;
+}
+
+#imgList div{
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content:center;
+    gap: 12px;
+
+    overflow: hidden;
+}
+
+.thumbnail {
+    width: 124px; height: 72px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 0 4 #00000048;
+    cursor: pointer;
+}
+
+.thumbnail:hover { transform: scale(1.05); }

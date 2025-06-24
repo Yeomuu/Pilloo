@@ -1,0 +1,84 @@
+/* 중앙 하단에 있는 mp3 플레이어 css 파일*/
+
+/* mp3 플레이어 */
+#player {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 540px;
+    height: 114px;
+
+    border-radius: 12px;
+    padding: 32px;
+
+    background: var(--bg-playlist-color);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Pretendard-Regular';
+}
+
+#playlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 28px;
+}
+
+/* 플레이리스트 정보 */
+#info {
+    display: flex;
+    gap: 24px
+}
+
+/* 트랙 정보 */
+#track-info {
+    display: flex;
+    flex-direction: column;
+    width: 204px;
+    max-width: 204px;
+    gap: 6px;
+}
+
+#track-info p{
+    font-family: "Pretendard Variable", sans-serif;
+    color: var(--font-color);
+}
+
+#title {
+    margin-top: 4px;
+    font-weight: bold;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 204px;
+}
+
+/* 음악 조작 */
+.controls {
+    display: flex;
+    justify-content: center;
+}
+.btn-volume, .btn-next {
+    margin-right: 27px;
+}
+.btn-before, .btn-pause {
+    margin-right: 20px;
+}
+
+/* 진행바 */
+.progress-bar {
+    width: 232px; 
+    height: 4px;
+    background: #555;
+    border-radius: 2px;
+    accent-color: white;
+    outline: none;
+    box-shadow: none;
+}

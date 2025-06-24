@@ -1,0 +1,883 @@
+*{margin: 0; padding: 0; box-sizing: border-box; list-style: none; color: rgb(0, 0, 0);font-family: 'S-CoreDream', sans-serif; font-weight: 400; font-style: normal;}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* 다크모드 색상 */
+:root{
+    --bg-icon-color: #1B1F214D;
+    --bg-icon-hover-color: rgba(255, 255, 255, 0.3);
+    --bg-playlist-color: #1B1F2166;
+    --bg-theme-color: #1B1F214D;
+    --bg-theme-hover-color: rgba(255, 255, 255, 0.3);
+    --bg-white-color: #ffffff66;
+
+    --font-color: #fff;
+    --font-light-color: #c2c2c2;
+    --icon-color: #fff;
+}
+
+/* 라이트 모드 색상 */
+body.light-mode{
+    --bg-icon-color: #ffffff4D;
+    --bg-icon-hover-color: #ffffff73;
+    --bg-playlist-color: #ffffff66;
+    --bg-theme-color: #72A6C4;
+    --bg-theme-hover-color: #5d9dc2;
+    --bg-white-color: #1B1F214D;
+
+    --font-color: #1B1F21;
+    --font-light-color: #949494;;
+    --icon-color: #3d3e42;
+}
+
+/* 버튼 기본 설정 */
+button{
+    all: unset; 
+    cursor: pointer;
+}
+
+/* 배경 기본 설정 */
+#background{
+    width: 110vw;
+    height: 110vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transform-origin: center;
+    user-select: none;
+
+    position: fixed;
+    top: -5vh; left: -5vw;
+
+    z-index: -2;
+}
+
+.noise{
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+
+    background: linear-gradient(0deg, #c98c5f80 0%, #c98c5f80 100%), url(https://i.ibb.co/x3TCktM/645cbb8…-noise.gif);
+
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* 로딩 스피너 */
+.spinner{
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+
+    background: #b1b1b11a;
+    backdrop-filter: blur(30px);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+
+    z-index: -1;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    
+    transition: all ease-in-out 0.5s;
+}
+
+/* 상단 로고 */
+#logo {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 79px;
+    
+    z-index: 100;
+}
+
+/* 사진 출처 */
+#photo-credit {
+    font-size: 16px;
+    font-size: 300;
+
+    position: absolute;
+    top: 40px;
+    right: 48px;
+    color: rgba(255,255,255,0.45);
+}
+
+#photo-credit a{
+    color: rgba(255,255,255,0.45);
+    text-decoration-line: none;
+}
+
+/* 상단 시계 및 타이머 */
+#clock{
+    width: 500px;
+    height: max-content;
+
+    font-size: 120px;
+    font-weight: 700;
+    text-align: center;
+
+    color: rgba(255,255,255);
+    letter-spacing: 2px;
+
+    position: absolute;
+    top: 266px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+}
+
+#timer{
+    width: 500px;
+    height: max-content;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    position: absolute;
+    top: 184px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#timer-time{
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255,255,255);
+    letter-spacing: 2px;
+
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+}
+
+.time-set {
+    width: 156px;
+    height: 48px;
+
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2%;
+    text-align: center;
+    color: var(--icon-color);
+
+    background-color: var(--bg-icon-color);
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+    border: 0.5px solid #fff;
+}
+
+.top-btn{
+    display: flex;
+    gap: 16px;
+
+    margin-bottom: 32px;
+}
+
+.timeBtn {
+    width: 112px;
+    height: 42px;
+
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2%;
+    text-align: center;
+    color: var(--icon-color);
+
+    background-color: var(--bg-icon-color);
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+    border: 0.5px solid #fff;
+}
+
+.bottom-btn{
+    display: flex;
+    gap: 16px;
+
+    margin-top: 9px;
+}
+
+.active{
+    background-color: #72A6C4;
+    color: #fff;
+}
+
+/* 왼쪽 하단 사이드바 */
+#left-sidebar {
+    position: absolute;
+    bottom: 44px;
+    left: 48px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 오른쪽 하단 사이드바 */
+#right-sidebar {
+    position: absolute;
+    bottom: 44px;
+    right: 48px;
+    
+    display: flex;
+    gap: 16px;
+}
+
+/* 홈/타이머 버튼 */
+.toggle-wrapper {
+    width: 98px;
+    height: 54px; 
+
+    border-radius: 30px;
+    border: 2px solid white;
+    padding: 0 9px;
+
+    background: var(--bg-icon-color);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+/* 파란 배경 원 */
+.toggle-bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    
+    background-color: #72A6C4; 
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* 버튼 그룹 */
+#time {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  
+    position: relative;
+    z-index: 2;
+}
+
+#time svg{
+    width: 28px;
+    height: 28px;
+}
+
+.timer-icon{
+    margin-top: 4px;
+}
+/* 아이콘 버튼(왼쪽 하단 사이드바, 테마 버튼 공통 css) */
+.icon-button {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+    border: 0.5px solid white;
+
+    background: var(--bg-icon-color);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    background: var(--bg-icon-hover-color);
+}
+
+.icon-button:active {
+    background-color: #a5cde454;
+}
+
+.icon-button svg {
+    width: 32px; 
+    object-fit: contain;
+}
+
+/* 테마 버튼 색상 */
+#theme-toggle{
+    background: var(--bg-theme-color);
+}
+
+#theme-toggle img{
+    width: 28px;
+}
+
+#theme-toggle:hover{
+    background: var(--bg-theme-hover-color);
+}
+
+/* 로그인 */
+#loginWrap {
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+
+    backdrop-filter: blur(30px);
+    background: #00000025;
+    
+    z-index: 10;
+}
+
+#login {
+    width: 670px;
+    height: 611px;
+
+    border-radius: 16px;
+    background-color: color-mix(in srgb, var(--bg-icon-color) 80%, transparent);
+    background-blend-mode: multiply;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: auto;
+}
+
+/* 플레이리스트 팝업 */
+#playlistBox{
+    width: 900px;
+    height: 450px;
+
+    display: none;
+    justify-content: center; 
+    align-items: center;
+
+    background: var(--bg-icon-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.3px);
+    -webkit-backdrop-filter: blur(5.3px);
+    border: 1px solid rgba(0, 0, 0, 0.29);
+    border-radius: 24px;
+
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 188px;
+
+    padding: 20px;
+    margin: auto auto 0;
+}
+
+.album-in{
+    width: 900px;
+    height: 450px;
+
+    display: none;
+    justify-content: center; 
+    align-items: center; 
+    gap: 85px;
+}
+
+.album-in h2{
+    font-size: 28px;
+    font-weight: 600;
+
+    margin: 32px 0 36px 18px;
+}
+
+.album-in h2,p{
+    color: var(--font-color);
+}
+
+.albumBox{
+    width: 286px;
+    height: 243px;
+
+    position: relative;
+    margin-left: 80px;
+    margin-bottom: 104px;
+}
+
+.albumBox #lp{
+    width: 210px;
+    height: 210px;
+
+    object-fit: cover;
+
+    position: absolute;
+    left: 77px; top: 34px;
+
+    transform-origin: center center;
+    animation: spin 2s linear infinite;
+    animation-play-state: paused;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.album{
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: 30px; left: 0;
+}
+
+#albumImg{
+    width: 157px;
+    height: 164px;
+
+    object-fit: cover;
+
+    position: absolute;
+    top: 24px; left: 18px;
+}
+
+.albumList{
+    width: 760px;
+    height: 450px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+
+    margin-right: 40px;
+}
+
+.albumList h2{
+    font-size: 28px;
+    font-weight: 600;
+
+    color: var(--font-color);
+    position: absolute;
+    top: 32px; left: 38px;
+}
+
+.LP{
+    flex: 0 0 auto;
+    position: relative;
+    opacity: 0.7;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.LP #lp{
+    width: 182px;
+    height: 185px;
+
+    position: absolute;
+    left: 56px; top: -5px;
+
+    margin: auto;
+}
+
+.albums{
+    width: 164px;
+    height: 174px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.albumStrock{
+    width: 154px;
+    height: 164px;
+
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+
+    margin: auto;
+}
+
+.albumThumb{
+    width: 102px;
+    height: 107px;
+
+    object-fit: cover;
+
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+
+    margin: auto;
+}
+
+.LP.center{
+    opacity: 1;
+}
+
+.LP.center .albumStrock{
+    width: 164px;
+    height: 174px;
+}
+
+.LP.center .albumThumb{
+    width: 112px;
+    height: 117px;
+}
+
+#albumListBtn{
+    width: max-content;
+    height: 60px;
+    display: flex;
+
+    position: absolute;
+    bottom: 42px;
+
+    margin: 0 auto;
+}
+
+.btn{
+    width: 60px;
+    height: 60px;
+
+    background-color: #f1f1f185;
+    border-radius: 50%;
+    backdrop-filter: blur(30px);
+    border: 0.5px solid #f1f1f185;
+    box-shadow: 0 4px 4px #00000021;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#albumName{
+    width: max-content;
+    margin: 0 75px;
+}
+
+#albumTitle{
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--font-color);
+}
+
+#albumSources{
+    font-size: 20px;
+    font-weight: 500px;
+    text-align: center;
+    color: var(--font-light-color);
+}
+
+#playlist {
+    width: 384px;
+    height: 348px;
+
+    flex: 1;                  
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#playlist li {
+    width: 384px;
+    height: 72px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--font-color);
+
+    position: relative;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+#playlist li .info{
+    display: flex;
+    flex-direction: column;
+}
+
+#playlist li .title {
+    width: 280px;
+    font-size: 16px;
+    font-weight: 600;
+
+    color: var(--font-color);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    margin-bottom: 8px;
+}
+
+#playlist li .tags {
+    width: 280px;
+    font-size: 14px;
+    font-weight: 300;
+
+    color: var(--font-light-color);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#playlist li .tags {
+  text-transform: lowercase;
+}
+
+/* 첫 글자만 대문자로 */
+#playlist li .tags::first-letter {
+  text-transform: uppercase;
+}
+
+#playlist li .btn-playpause {
+    width: 26px;
+    height: 26px;
+
+    background: none;
+    border: none;
+    color: var(--font-color);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+#playlist li.highlight .info{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px 12px;
+    padding-left: 36px;   
+}
+
+#playlist li.highlight .title{
+    width: 236px;
+}
+
+#playlist li.highlight .tags{
+    width: 236px;
+}
+
+#playlist li .btn-playpause{
+    position: absolute;
+    right: 24px;
+}
+
+#playlist li.highlight::before {
+  content: '▶';
+  position: absolute;
+  
+  font-size: 20px;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 로그아웃 */
+#logout{
+    width: 216px;
+    height: 48px;
+
+    font-size: 16px;
+    color: var(--font-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    position: fixed;
+    left: 0; right: 0;
+    bottom: 44px;
+
+    background: #ffffff4D;
+    backdrop-filter: blur(40px);
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    margin: 0 auto;
+}
+
+/* 아이디&패스워드 로그인 */
+#login h2 {
+    font-size: 40px;
+    font-weight: 500;
+    color: #fff;
+
+    margin-bottom: 44px;
+}
+
+#idLogin {
+    width: 496px;
+}
+
+#ID{
+    width: 100%;
+    height: 36px;
+
+    font-size: 20px;
+    color: #E9E9E9;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+#ID::placeholder{
+    font-weight: 300;
+
+    color: #E9E9E9;
+}
+
+#ID:focus{
+    outline: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+#password{
+    width: 100%;
+    height: 36px;
+
+    font-size: 20px;
+    color: #E9E9E9;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dfdfdf;
+
+    margin-top: 10px;
+}
+
+#password::placeholder{
+    font-weight: 300;
+
+    color: #E9E9E9;
+}
+
+#password:focus{
+    outline: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+#checkbox{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+#openPassword {
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+    border: 1px solid #fff;
+
+    appearance: none;
+}
+
+#openPassword:checked{
+    border: none;
+    background-color: #72A6C4;
+}
+
+#openPassword:focus{
+    outline: none;
+    border: 1px solid #5d9dc2;
+}
+
+#checkbox label{
+    line-height: 22px;
+    color: #E4E4E4;
+}
+
+#Sign-in{
+    width: 100%;
+    height: 50px;
+
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+
+    border-radius: 8px;
+    border: none;
+    background-color: #72A6C4;
+
+    margin-top: 32px;
+}
+
+/* 로그인 구분선 */
+.divLine {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 496px;
+    margin: 18px 0;
+}
+
+.divLine .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #F0F0F0; /* 원하는 색상 */
+    min-width: 0; 
+}
+
+.divLine .text {
+    white-space: nowrap;
+    font-size: 14px;
+    color: #E4E4E4; /* 원하는 색상 */
+}
+
+/* 카카오 간편 로그인 */
+#kakaoLogin {
+    width: 496px;
+    height: 50px;
+
+    font-size: 18px;
+    font-weight: 500;
+    color: #31312C;
+
+    border-radius: 8px;
+    border: none;
+    background-color: #FEE500;
+
+    margin-bottom: 90px;
+}
+
+#help, #help a {
+    color: #E9E9E9;
+    text-decoration-line: none;
+}
